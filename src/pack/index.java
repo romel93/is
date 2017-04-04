@@ -125,3 +125,131 @@ public class index extends JFrame{
 		calc = new JButton("Рассчитать"); //В скобках - надпись на кнопке
 		del = new JButton("Очистить"); 
 	
+		resid = new JTextField(); 
+		str = new JTextField(); 
+		travel = new JTextField(); 
+		transf = new JTextField(); 
+		food = new JTextField(); 
+		text_add_1 = new JTextField(); 
+		text_add_2 = new JTextField(); 
+		add_1 = new JTextField(); 
+		add_2 = new JTextField(); 
+		agen = new JTextField("10"); 
+		disc = new JTextField(); 
+
+		//выравнивание текста по центру
+		resid.setHorizontalAlignment(JTextField.CENTER); 
+		str.setHorizontalAlignment(JTextField.CENTER); 
+		travel.setHorizontalAlignment(JTextField.CENTER); 
+		transf.setHorizontalAlignment(JTextField.CENTER); 
+		food.setHorizontalAlignment(JTextField.CENTER); 
+		text_add_1.setHorizontalAlignment(JTextField.CENTER); 
+		text_add_2.setHorizontalAlignment(JTextField.CENTER); 
+		add_1.setHorizontalAlignment(JTextField.CENTER); 
+		add_2.setHorizontalAlignment(JTextField.CENTER); 
+		agen.setHorizontalAlignment(JTextField.CENTER); 
+		disc.setHorizontalAlignment(JTextField.CENTER);	
+		
+		//установка внутренних отступов для текстового поля (2-верхний отступ, 5-левый, 2-нижний, 5-правый)
+		resid.setMargin(new Insets(2, 5, 2, 5));
+		str.setMargin(new Insets(2, 5, 2, 5));
+		travel.setMargin(new Insets(2, 5, 2, 5));
+		travel.setMargin(new Insets(2, 5, 2, 5));
+		food.setMargin(new Insets(2, 5, 2, 5));
+		text_add_1.setMargin(new Insets(2, 5, 2, 5));
+		text_add_2.setMargin(new Insets(2, 5, 2, 5));
+		add_1.setMargin(new Insets(2, 5, 2, 5));
+		add_2.setMargin(new Insets(2, 5, 2, 5));
+		agen.setMargin(new Insets(2, 5, 2, 5));
+		disc.setMargin(new Insets(2, 5, 2, 5));
+
+		//компонент флажок 
+		check_travel = new JCheckBox("Проезд (авиа/автобус/жд), руб:");
+		check_transf = new JCheckBox("Трансфер, руб:");
+		check_food = new JCheckBox("Питание, руб:");
+		check_add = new JCheckBox("Дополнительные услуги");
+		check_disc = new JCheckBox("Скидка, %:");
+
+		
+		//Добавление компонентов JCheckBox, JLabel, JTextField на панель panel
+		panel.add(label_1);
+		panel.add(resid);
+		panel.add(label_2);
+		panel.add(str);
+		panel.add(check_travel);
+		panel.add(travel);
+		panel.add(check_transf);
+		panel.add(transf);
+		panel.add(check_food);
+		panel.add(food);
+		panel.add(check_add);
+		panel.add(add);
+		panel.add(text_add_1);
+		panel.add(add_1);
+		panel.add(text_add_2);
+		panel.add(add_2);
+		panel.add(label_3);
+		panel.add(agen);
+		panel.add(check_disc);
+		panel.add(disc);
+		panel.add(label_4);
+		panel.add(itog);
+		panel.add(del);
+		panel.add(calc);
+		//Добавление компонентов JLabel, JTextField на панель panel
+
+		travel.setEditable(false);
+		transf.setEditable(false);
+		food.setEditable(false);
+		text_add_1.setEditable(false);
+		add_1.setEditable(false);
+		text_add_2.setEditable(false);
+		add_2.setEditable(false);
+		disc.setEditable(false);
+		check_travel.setForeground(Color.GRAY); 
+		check_transf.setForeground(Color.GRAY); 
+		check_food.setForeground(Color.GRAY); 
+		check_add.setForeground(Color.GRAY); 
+		check_disc.setForeground(Color.GRAY); 
+
+/*ПРОЕЗД*/
+		check_travel.addItemListener(new ItemListener(){   /*Для компонента флажок устанавливаем слушатель события                                                        
+			Если нажать на компонент - сработает проверка выбран флажок или снят */                                                     
+			public void itemStateChanged(ItemEvent e) 
+			/*. В теле метода itemStateChanged располагается код, который выполняется при смене состояния флажка. */
+			{
+				if (e.getSource()==check_travel)//если событие произошло именно с флажком check_travel, то выполняется следующее
+					if(e.getStateChange()==1){ /* Если данный компонент флажок включен (==1), то это означает что проезд включается в стоимость тура  */
+						int_travel=1; //переменная которая отвечает за то проезд включается в стоимость тура
+						travel.setEditable(true);
+						check_travel.setForeground(Color.BLACK); 
+
+						}
+					else { //если флажок выключен
+						int_travel=0; //переменная которая отвечает за то проезд включается в стоимость тура
+						travel.setEditable(false);
+						check_travel.setForeground(Color.GRAY); 
+
+					}
+			}                                                       
+    	   }); 	
+
+/*ТРАНСФЕР*/
+		check_transf.addItemListener(new ItemListener(){   /*Для компонента флажок устанавливаем слушатель события                                                        
+			Если нажать на компонент - сработает проверка выбран флажок или снят */                                                     
+			public void itemStateChanged(ItemEvent e) 
+			/*. В теле метода itemStateChanged располагается код, который выполняется при смене состояния флажка. */
+			{
+				if (e.getSource()==check_transf)//если событие произошло именно с флажком check_transf, то выполняется следующее
+					if(e.getStateChange()==1){ /* Если данный компонент флажок включен (==1), то это означает что трансфер включается в стоимость тура  */
+						int_transf=1; //переменная которая отвечает за то трансфер включается в стоимость тура
+						transf.setEditable(true);
+						check_transf.setForeground(Color.BLACK); 
+						}
+					else { //если флажок выключен
+						int_transf=0; //переменная которая отвечает за то трансфер включается в стоимость тура
+						transf.setEditable(false);
+						check_transf.setForeground(Color.GRAY); 
+					}
+			}                                                       
+    	   }); 	
