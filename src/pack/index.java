@@ -253,3 +253,141 @@ public class index extends JFrame{
 					}
 			}                                                       
     	   }); 	
+		
+/*ПИТАНИЕ*/
+		check_food.addItemListener(new ItemListener(){   /*Для компонента флажок устанавливаем слушатель события                                                        
+			Если нажать на компонент - сработает проверка выбран флажок или снят */                                                     
+			public void itemStateChanged(ItemEvent e) 
+			/*. В теле метода itemStateChanged располагается код, который выполняется при смене состояния флажка. */
+			{
+				if (e.getSource()==check_food)//если событие произошло именно с флажком check_food, то выполняется следующее
+					if(e.getStateChange()==1){ /* Если данный компонент флажок включен (==1), то это означает что питание включается в стоимость тура  */
+						int_food=1; //переменная которая отвечает за то питание включается в стоимость тура
+						food.setEditable(true);
+						check_food.setForeground(Color.BLACK); 
+
+						}
+					else { //если флажок выключен
+						int_food=0; //переменная которая отвечает за то питание включается в стоимость тура
+						food.setEditable(false);
+						check_food.setForeground(Color.GRAY); 
+
+					}
+			}                                                       
+    	   }); 	
+		
+/*ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ*/
+		check_add.addItemListener(new ItemListener(){   /*Для компонента флажок устанавливаем слушатель события                                                        
+			Если нажать на компонент - сработает проверка выбран флажок или снят */                                                     
+			public void itemStateChanged(ItemEvent e) 
+			/*. В теле метода itemStateChanged располагается код, который выполняется при смене состояния флажка. */
+			{
+				if (e.getSource()==check_add)//если событие произошло именно с флажком check_add, то выполняется следующее
+					if(e.getStateChange()==1){ /* Если данный компонент флажок включен (==1), то это означает что дололнит.услуги включаются в стоимость тура  */
+						int_add=1; //переменная которая отвечает за то дололнит.услуги включается в стоимость тура
+						check_add.setForeground(Color.BLACK); 
+						text_add_1.setEditable(true);
+						add_1.setEditable(true);
+						text_add_2.setEditable(true);
+						add_2.setEditable(true);
+						}
+					else { //если флажок выключен
+						int_add=0; //переменная которая отвечает за то дололнит.услуги включается в стоимость тура
+						check_add.setForeground(Color.GRAY); 
+						text_add_1.setEditable(false);
+						add_1.setEditable(false);
+						text_add_2.setEditable(false);
+						add_2.setEditable(false);
+					}
+			}                                                       
+    	   }); 
+/*СКИДКА*/
+		check_disc.addItemListener(new ItemListener(){   /*Для компонента флажок устанавливаем слушатель события                                                        
+			Если нажать на компонент - сработает проверка выбран флажок или снят */                                                     
+			public void itemStateChanged(ItemEvent e) 
+			/*. В теле метода itemStateChanged располагается код, который выполняется при смене состояния флажка. */
+			{
+				if (e.getSource()==check_disc)//если событие произошло именно с флажком check_disc, то выполняется следующее
+					if(e.getStateChange()==1){ /* Если данный компонент флажок включен (==1), то это означает что турагенство предоставляет скидку */
+						int_disc=1; //переменная которая отвечает за то что турагенство предоставляет скидку
+						disc.setEditable(true);
+						check_disc.setForeground(Color.BLACK); 
+						}
+					else { //если флажок выключен
+						int_disc=0; //переменная которая отвечает за то что турагенство предоставляет скидку
+						disc.setEditable(false);
+						check_disc.setForeground(Color.GRAY); 
+					}
+			}                                                       
+    	   }); 	
+		
+		calc.addActionListener(new ActionListener()   
+    			/* 	calc - кнопка Рассчитать 
+    	 		"."  - указывает к какой переменной (кнопке) следует применить слушателя.
+    	 		addActionListener - добавление слушателя ActionListener к кнопке
+    	  		new - Оператор new создает экземпляр указанного класса 
+    	  		(Для того чтобы кнопки стали функциональными, каждой из них необходимо присвоить обработчик событий, 
+    	  		который будет отвечать за реагирование на события. 
+    	  		В нашем случае требуется идентифицировать событие нажатия кнопки – путем щелчка мышью. 
+    	  		Поэтому будет использоваться интерфейс "ActionListener", 
+    	  		предназначенный для обработки событий "ActionEvent".
+    	  		тело интерфейса указывается ниже после фигурной скобки "{"
+    	  		*/ 
+    	   {                                                         
+    	    public void actionPerformed(ActionEvent e)   
+    	    /* 	ActionListener" имеет метод "actionPerformed" объекта "ActionEvent", 
+      		который реализуется путем простого вызова обработчика событий ActionPerformed.
+      		Ключевое слово public означает, что метод actionPerformed() доступен для любого другого класса Java
+      		Ключевое слово void означает, что метод main() не возвращает данных в программу, которая его вызвала. 
+      	*/
+    	    {  
+	    		
+    	    	if ((isValidInput(resid, "стоимость проживания"))
+    	    		&&(isValidInput(str, "стоимость страховки"))
+    	    		&&(isValidInput(agen, "комиссию турагенства"))) {
+	    		/* if - оператор если. * isValidInput проверяет данные на правильность, т.е. 
+		 		если в текстовые поля введены буквы или символы (текст, который невозможно преобразовать в цифры).
+		   		Если введены некорректные данные, то выдает ошибку */	
+    	    		int valid_travel=0,valid_transf=0,valid_food=0,valid_disc=0,valid_add=0;
+    	    			if (int_travel==1){
+    	    				if (isValidInput(travel, "стоимость проезда")){
+    	    					valid_travel=1;
+    	    				}
+    	    			} else {valid_travel=1;}
+    	    			if (int_transf==1){
+    	    				if (isValidInput(transf, "стоимость трансферта")){
+    	    					valid_transf=1;
+    	    				}
+    	    			}else {valid_transf=1;}
+    	    			if (int_food==1){
+    	    				if (isValidInput(food, "стоимость питания")){
+    	    					valid_food=1;
+    	    				}
+    	    			}else {valid_food=1;}
+    	    			if (int_disc==1){
+    	    				if (isValidInput(disc, "размер скидки")){
+    	    					valid_disc=1;
+    	    				}
+    	    			}else {valid_disc=1;}
+    	    			if (int_add==1){
+    	    				if ((isValidInput(add_1, "стоимость дополнительных услуг"))
+    	    					&&(isValidInput(add_2, "стоимость дополнительных услуг")))
+    	    				{
+    	    					valid_add=1;
+    	    				}
+    	    			}else {valid_add=1;}
+    	    		
+    	    		if ((valid_travel==1)&&(valid_transf==1)&&(valid_food==1)&&(valid_disc==1)&&
+    	    				(valid_add==1)){ //если все данные введены верно - производим расчет
+    	    			if ((int_disc==1)&&(Double.parseDouble(disc.getText())>Double.parseDouble(agen.getText()))){ //если количество детей до 18 лет больше чем количество детей, parseInt - преобразование введенного текста в цифры
+    		            	JDialog D=new JDialog();
+    	                	JOptionPane.showMessageDialog(D, "Введите правильные данные! Скидка не может быть больше комиссии турагенства", "Ошибка", JOptionPane.WARNING_MESSAGE);
+    	                	/* showMessageDialog Отображает модальный диалог с одной кнопкой, которая помечена текстом "Oшибка" (или его локальным эквивалентом). 
+    		    			 Когда модальный диалог становится видимым, он блокирует пользовательский ввод в другие окна программы. 
+    		    		 "Введите правильные данные!"  это сообщение отображаемые в диалоге
+    		               */
+    	                	disc.requestFocus();//ставит фокус на строчке disc
+    		    			disc.setText(""); 
+    		    			/* setText означает написать текст в текстовое поле. Между кавычками ничего нет, значит текстовое поле будет пустым
+    				    	*/  
+    		            } else {
