@@ -391,3 +391,144 @@ public class index extends JFrame{
     		    			/* setText означает написать текст в текстовое поле. Между кавычками ничего нет, значит текстовое поле будет пустым
     				    	*/  
     		            } else {
+    		            	double d_travel,d_transf, d_food, d_add_1,d_add_2,d_disc,d_add;
+    	    	    		double d_resid= Double.parseDouble(resid.getText());
+    	    	    		double d_str= Double.parseDouble(str.getText());
+    	    	    		double d_agen= Double.parseDouble(agen.getText());
+    	    	    		if (int_travel==1){
+    	    	    			d_travel= Double.parseDouble(travel.getText());
+    	    	    			} else {d_travel=0;}
+    	    	    		if (int_transf==1){
+    	    	    			d_transf= Double.parseDouble(transf.getText());
+    	    	    			} else {d_transf=0;}
+    	    	    		if (int_food==1){
+    	    	    			d_food= Double.parseDouble(food.getText());
+    	    	    			} else {d_food=0;}
+    	    	    		if (int_add==1){
+    	    	    			d_add_1= Double.parseDouble(add_1.getText());
+    	    	    			d_add_2= Double.parseDouble(add_2.getText());
+    	    	    		} else {
+    	    	    			d_add_1=0;
+    	    	    			d_add_2=0;}
+    	    	    		if (int_disc==1){
+    	    	    			d_disc= Double.parseDouble(disc.getText());
+    	    	    			} else {d_disc=0;}
+    	    	    		/* В переменную  записываются данные введеные пользователем в текстовое поле которое расположено в файле Index.
+    	    	    		Преобразование данных в тип Double. */ 
+    	    	    		
+    	    	    		if (int_add==1){
+        	    	    		d_add=d_add_1+d_add_2;
+        	    	    		String s_add = String.format("%.2f", d_add);
+            	    			add.setText(s_add); /* Записываем строковую переменную в поля Jlabel */
+    	    	    		} else {d_add=0;}
+
+    	    	    		double d_itog=(d_resid+d_str+d_travel+d_transf+d_food+d_add)*(1+(d_agen-d_disc)/100);
+    	    	    		
+        	    			String s_itog = String.format("%.2f", d_itog);
+        	    			/* String - указываем что переменная будет иметь строковый тип,
+        	    		     * s_add - название новой переменной,
+        	    		     * String.format - преобразование переменной в строкой тип,
+        	    		     	%.2f - указываем что переменная имеет тип Float, показываем 2 знака после запятой,
+        	    		     	d_add - переменная типа double, которую надо преобразовать в строковый тип
+        	    		     	 */
+        	    			itog.setText(s_itog);
+
+    		            }
+    	    		}
+    	    		
+    	    	}
+    	    	}   	    	                             
+    	   });
+		
+//Слушатель для кнопки ОЧИСТИТЬ			
+				del.addActionListener(new ActionListener(){    //добавляем слушателя события для кнопки 
+					/*      "."  - указывает к какой переменной (кнопке) следует применить слушателя.
+				 	addActionListener - добавление слушателя ActionListener к кнопке
+				  	new - Оператор new создает экземпляр указанного класса 
+				  	(Для того чтобы кнопки стали функциональными, каждой из них необходимо присвоить обработчик событий, 
+				  	который будет отвечать за реагирование на события. 
+				  	В нашем случае требуется идентифицировать событие нажатия кнопки – путем щелчка мышью. 
+				  	Поэтому будет использоваться интерфейс "ActionListener", 
+				  	предназначенный для обработки событий "ActionEvent".
+				  	тело интерфейса указывается ниже после фигурной скобки "{"
+		    	    */
+		    	    public void actionPerformed(ActionEvent e) 
+		    	    /* 	ActionListener" имеет метод "actionPerformed" объекта "ActionEvent", 
+			      	который реализуется путем простого вызова обработчика событий ActionPerformed.
+			      	Ключевое слово public означает, что метод actionPerformed() доступен для любого другого класса Java
+			      	Ключевое слово void означает, что метод main() не возвращает данных в программу, которая его вызвала. 
+			      	*/             
+		    	    {   
+				    	//	Обнуляем все поля, переменные, флажки ставим в состояние выключен
+		    	    	resid.setText("");
+		    	    	str.setText("");
+		    	    	travel.setText("");
+		    	    	transf.setText("");
+		    	    	food.setText("");
+		    	    	add.setText("");
+		    	    	text_add_1.setText("");
+		    	    	add_1.setText("");
+		    	    	text_add_2.setText("");
+		    	    	add_2.setText("");
+		    	    	agen.setText("10");
+		    	    	disc.setText("");
+		    	    	itog.setText("");
+				    	check_travel.setSelected(false);
+				    	int_travel=0;
+				    	check_transf.setSelected(false);
+				    	int_transf=0;
+				    	check_food.setSelected(false);
+				    	int_food=0;
+				    	check_add.setSelected(false);
+				    	int_add=0;
+				    	check_disc.setSelected(false);
+				    	int_disc=0;
+				    	check_transf.setSelected(false);
+				    	int_transf=0;
+		    	    }    	    	                                                        
+		    	   });		
+	}	
+
+	//проверка данных, введенных пользователем
+    public static boolean isValidInput(JTextField jtxt, String description) {
+        JDialog D = new JDialog();
+		//если был введен какой-либо текст
+        if (jtxt.getText().trim().length() > 0) {
+            //проверка на ввод только целого числа
+            try { /* Для задания блока программного кода, который требуется защитить от исключений, используется ключевое слово try. 
+				Сразу же после try-блока помещается блок catch, задающий тип исключения которое вы хотите обрабатывать.
+				Исключение – это проблемная ситуация, возникающая по мере выполнения кода программы. Работает она так:
+				1.Выполняется код внутри блока try. 2.Если в нём ошибок нет, то блок catch(err) игнорируется, то есть выполнение 
+				доходит до конца try и потом прыгает через catch. 3.Если в нём возникнет ошибка, то выполнение try на ней
+				 прерывается, и управление прыгает в начало блока catch(err).
+				*/
+                 double num = Double.parseDouble(jtxt.getText()); //попытка преобразовать текст в целое число      
+                return true; //если все нормально - возвращаем true
+            } catch (NumberFormatException e) {
+            	/* Для задания блока программного кода, который требуется защитить от исключений, используется ключевое слово try. 
+				Сразу же после try-блока помещается блок catch, задающий тип исключения которое вы хотите обрабатывать.
+				Исключение – это проблемная ситуация, возникающая по мере выполнения кода программы. Работает она так:
+				1.Выполняется код внутри блока try. 2.Если в нём ошибок нет, то блок catch(err) игнорируется, то есть выполнение 
+				доходит до конца try и потом прыгает через catch. 3.Если в нём возникнет ошибка, то выполнение try на ней
+				 прерывается, и управление прыгает в начало блока catch(err).
+				*/
+                //расположить курсор в текстовое поле, чтобы пользователь еще раз ввел число
+                jtxt.requestFocus();
+                jtxt.setText("");//очистить текстовое поле
+                //предупреждение - неверный формат числа
+                JOptionPane.showMessageDialog(D, "Вы должны ввести число!", "Ошибка", JOptionPane.WARNING_MESSAGE);
+                return false;//ошибка - возвращаем false
+            }
+        } else {// если пользователь не ввели никаких данных
+            //предупреждение, что нужно ввести данные
+            JOptionPane.showMessageDialog(D, "Введите " + description, "Ошибка", JOptionPane.WARNING_MESSAGE);
+
+            //расположить курсор в текстово окне, чтобы пользователь еще раз ввел число
+            jtxt.requestFocus();
+            jtxt.selectAll();//очистить текстовое поле
+
+            //ошибка - возвращаем false
+            return false;
+        }
+    }	
+}
